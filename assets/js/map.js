@@ -7,9 +7,16 @@ let miniMap = null;
 let miniMarker = null;
 
 function initMap() {
+  
   const pinsContainer = document.getElementById('pinsContainer');
   if (!pinsContainer || typeof developments === 'undefined') return;
 
+  // Precargar imágenes de fondo para que el cambio de pin sea instantáneo
+  developments.forEach(dev => {
+    const preloadImg = new Image();
+    preloadImg.src = dev.image;
+  });
+  
   // 1. Renderizar los botones de los pins sobre el visor fotográfico
   pinsContainer.innerHTML = developments.map(dev => {
     return `
